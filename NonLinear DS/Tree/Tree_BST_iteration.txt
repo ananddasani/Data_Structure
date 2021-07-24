@@ -1,0 +1,117 @@
+                            ITETATION METHOD OF THE OPERATION IN THE BST 
+
+                        -----------------   INSERTION   -----------------
+
+void insert()
+{
+    // creating the node to be inserted , curr for current node , parent for the node where we will insert new node
+    NODE *curr = root, *parent = NULL, *temp = NULL;
+    temp = (NODE *)malloc(sizeof(NODE));
+    temp->left = temp->right = NULL;
+
+    printf("\nenter the element: ");
+    scanf("%d", &temp->data);
+
+    if (root == NULL)
+    {
+        // means no node is there then simply return the node which will be root node
+        root = temp;
+        printf("\nROOT NODE CREATED SUCCESSFULLY !\n");
+    }
+    else
+    {                //finding leaf node where we can insert new node
+        while (curr) // if there any node is present them we will traverse the tree until we get the bottomest node where we can insert the node
+        {
+            parent = curr; // updating the parent node
+
+            if (temp->data > curr->data) // if the ele is greater then the curr node data then go to right
+                curr = curr->right;
+            else // else go to left
+                curr = curr->left;
+        }
+        if (temp->data > parent->data) // if data is greater than add it to right side
+        {
+            parent->right = temp;
+            printf("\n%d inserted to the right of parent:%d\n", temp->data, parent->data);
+        }
+        else // else add it to left side
+        {
+            parent->left = temp;
+            printf("\n%d inserted to the left of parent:%d\n", temp->data, parent->data);
+        }
+    }
+}
+
+                         -----------------     DELETION     -----------------
+void delete (NODE *root, int key)
+{
+    NODE *parent = NULL, *current = root;
+
+    // traversing to the targered node which is to be deleted
+    while (current && key != current->data)
+    {
+        parent = current;
+        if (key <= current->data)
+            current = current->left;
+        else
+            current = current->right;
+    }
+
+    //if element is not there then current reach to leaf node and in next itetration it will be assigned NULL
+    if (current == NULL)
+    {
+        printf("\n%d not present in the BST :(\n", key);
+        return;
+    }
+
+    // if there is no child to the targered node (leaf node , 0 child)
+    if (current->left == NULL && current->right == NULL)
+    { // then simply delete that leaf node
+        if (current == parent->left)
+        {
+            printf("\n%d which was left node of %d is deleted successfully !\n", current->data, parent->data);
+            parent->left = NULL;
+            free(current);
+        }
+        else
+        {
+            printf("\n%d which was right node of %d is deleted successfully !\n", current->data, parent->data);
+            parent->right = NULL;
+            free(current);
+        }
+    }
+
+    // if there is one child to the targered node (1 child)
+    if (current == parent->left) // if current is left side
+    {
+        if (current->right != NULL && current->left == NULL)
+        {
+            NODE *t1 = current->right;
+            if (t1->left == NULL && t1->right == NULL)
+            {
+                parent->left = t1;
+                current->right = NULL;
+                free(current);
+            }
+            else
+            {
+            }
+        }
+        else
+        {
+            NODE *t2 = current->left;
+            if (t2->right == NULL && t2->left == NULL)
+            {
+                parent->left = t2;
+                current->left = NULL;
+                free(current);
+            }
+            else
+            {
+            }
+        }
+    }
+    else
+    { // if current is right side
+    }
+}
