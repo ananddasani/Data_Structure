@@ -40,5 +40,5 @@ here is the course for you :: [C Language Basic -> Advance](https://github.com/a
 
 ## License
 
-Licensed under the [MIT License](https://github.com/ananddasani/Algorithm_Analysis/blob/main/LICENSE).
+Licensed under the [MIT License](https://github.com/ananddasani/Data_Structure/blob/main/LICENSE).
 
